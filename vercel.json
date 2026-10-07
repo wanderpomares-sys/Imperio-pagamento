@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "criar-pagamento.js", "use": "@vercel/node" },
+    { "src": "verificar-pagamento.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/criar-pagamento", "dest": "/criar-pagamento.js" },
+    { "src": "/api/verificar-pagamento", "dest": "/verificar-pagamento.js" }
+  ]
+}

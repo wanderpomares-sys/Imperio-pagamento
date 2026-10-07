@@ -1,11 +1,6 @@
 // Cria uma preferência de pagamento no Mercado Pago e devolve o link de checkout.
-// O jogo chama isso quando o jogador clica em "Pagar com Mercado Pago".
-//
 // Variável de ambiente necessária no Vercel: MERCADOPAGO_ACCESS_TOKEN
-// (Mercado Pago → Seu negócio → Configurações → Credenciais → Credenciais de produção)
-
-export default async function handler(req, res) {
-  // Libera chamada vinda do GitHub Pages (ajuste o domínio se mudar de endereço)
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -15,8 +10,6 @@ export default async function handler(req, res) {
   const token = process.env.MERCADOPAGO_ACCESS_TOKEN;
   if (!token) return res.status(500).json({ erro: 'Servidor sem token configurado' });
 
-  // Identificador único dessa tentativa de compra — o jogo guarda isso localmente
-  // e usa depois pra perguntar "esse pagamento específico foi aprovado?"
   const referencia = `sede3_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 
   try {
@@ -51,12 +44,9 @@ export default async function handler(req, res) {
       return res.status(502).json({ erro: 'Mercado Pago recusou a criação do link', detalhe: dados });
     }
 
-    return res.status(200).json({
-      linkPagamento: dados.init_point,
-      referencia,
-    });
+    return res.status(200).json({ linkPagamento: dados.init_point, referencia });
   } catch (e) {
     console.error('Erro ao criar preferência:', e);
     return res.status(500).json({ erro: 'Falha ao falar com o Mercado Pago' });
   }
-}
+};

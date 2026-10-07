@@ -1,9 +1,6 @@
 // Confere no Mercado Pago se o pagamento com essa referência foi aprovado.
-// O jogo chama isso quando o jogador clica em "Já paguei, verificar".
-//
 // Variável de ambiente necessária no Vercel: MERCADOPAGO_ACCESS_TOKEN
-
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -37,4 +34,4 @@ export default async function handler(req, res) {
     console.error('Erro ao verificar pagamento:', e);
     return res.status(500).json({ erro: 'Falha ao falar com o Mercado Pago' });
   }
-}
+};
