@@ -30,9 +30,9 @@ module.exports = async function handler(req, res) {
         }],
         external_reference: referencia,
         back_urls: {
-          success: 'https://wanderpomares-sys.github.io/ImperioDasMaquinas/?pagamento=sucesso',
-          failure: 'https://wanderpomares-sys.github.io/ImperioDasMaquinas/?pagamento=falha',
-          pending: 'https://wanderpomares-sys.github.io/ImperioDasMaquinas/?pagamento=pendente',
+          success: 'https://imperiodasmaquinaspesadas.com.br/?pagamento=sucesso',
+          failure: 'https://imperiodasmaquinaspesadas.com.br/?pagamento=falha',
+          pending: 'https://imperiodasmaquinaspesadas.com.br/?pagamento=pendente',
         },
         auto_return: 'approved',
       }),
